@@ -6,7 +6,7 @@
 class Server : public Network
 {
 	bool isRunning;
-	vector<ENetPeer*> registeredClients;
+
 public:
 	Server();
 private:

@@ -33,7 +33,13 @@
     <ClCompile Include="Resources\ChatBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\FileLoader\FileLoader.cpp">
+    <ClCompile Include="Network\Peer\PeerWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetEvent\NetEventWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Packet\PacketWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +59,13 @@
     <ClInclude Include="Resources\ChatBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\FileLoader\FileLoader.h">
+    <ClInclude Include="Network\Peer\PeerWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetEvent\NetEventWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Packet\PacketWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

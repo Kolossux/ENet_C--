@@ -1,12 +1,11 @@
 #include "Server.h"
-
-
+#include "../NetEvent/NetEventWrapper.h"
+#include "../Client/Client.h"
 
 Server::Server() : Network()
 {
 	hostData = HostData(32, 2, Bandwidth(0, 0));
 	type = NT_SERVER;
-	latency = 100;
 	isRunning = false;
 }
 
@@ -25,25 +24,25 @@ void Server::Run()
 {
 	while (isRunning)
 	{
-		while (enet_host_service(host, &netEvent, latency) > 0)
+		while (enet_host_service(host, netEvent, latency) > 0)
 		{
-			switch (netEvent.type)
+			switch (netEvent->type)
 			{
 			case ENET_EVENT_TYPE_CONNECT:
-				RegisterClient(netEvent.peer);
+				RegisterClient(netEvent->peer);
 				break;
 			case ENET_EVENT_TYPE_DISCONNECT:
 			{
-				ShowAddress("A new client disconnected with :", netEvent.peer->address);
+				ShowAddress("A new client disconnected with :", netEvent->peer->address);
 			}
 			break;
 			case ENET_EVENT_TYPE_RECEIVE:
-				if (netEvent.packet)
+				if (netEvent->packet)
 				{
 					Display("New message from: ", false, YELLOW);
-					ShowAddress("Client ", netEvent.peer->address, false);
-					Display(": " + string((char*)netEvent.packet->data));
-					Display("Client Registered : " + to_string(registeredClients.size()),true, YELLOW);
+					ShowAddress("Client ", netEvent->peer->address, false);
+					Display(": " + string((char*)netEvent->packet->data));
+					//Display(": " + reinterpret_cast<Client*>(netEvent->packet->data)->GetName());
 				}
 				break;
 			case ENET_EVENT_TYPE_NONE:
@@ -60,4 +59,5 @@ void Server::Run()
 void Server::RegisterClient(ENetPeer* _client)
 {
 	registeredClients.push_back(_client);
+    Display("Client Registered : " + to_string(registeredClients.size()),true, YELLOW);
 }

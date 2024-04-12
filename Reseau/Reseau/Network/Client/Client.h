@@ -2,12 +2,13 @@
 #include "../../Macro/Macro.h"
 #include "../Network.h"
 
+class Server;
 
 class Client : public Network
 {
 	bool isConnected;
 	string name;
-	ENetPeer* peer;
+	PeerWrapper* peer;
 
 public:
 	inline const string& GetName()const
@@ -16,6 +17,7 @@ public:
 	}
 public:
 	Client();
+	void SynchronizeClientList(const vector<ENetPeer*>&);
 private:
 	void Connect(const char* _ip, const int _port) override;
 	void Register();

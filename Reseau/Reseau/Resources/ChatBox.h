@@ -1,6 +1,8 @@
 #pragma once
 #include "../Macro/Macro.h"
 
+class PeerWrapper;
+
 class ChatBox
 {
 	string text;
@@ -14,8 +16,7 @@ public:
 	ChatBox();
 private:
 	void DisplayText(const string& _message) const;
-	void GetFindPath() const;
 public:
-	void Open(string& _message);
+	void Open(string& _message, const vector<ENetPeer*>& _clients);
 };
 

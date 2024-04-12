@@ -1,4 +1,5 @@
 #include "Network.h"
+#include "NetEvent/NetEventWrapper.h"
 
 Network::Network()
 {
@@ -6,7 +7,8 @@ Network::Network()
 	address = ENetAddress();
 	host = nullptr;
 	type = NT_NONE;
-	netEvent = ENetEvent();
+	netEvent = new NetEventWrapper();
+	latency = 1000;
 }
 
 void Network::Connect(const char* _ip, const int _port)

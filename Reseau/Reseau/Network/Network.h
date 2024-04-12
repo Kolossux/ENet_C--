@@ -1,5 +1,9 @@
 #pragma once
 #include "../Macro/Macro.h"
+
+class NetEventWrapper;
+class PeerWrapper;
+
 enum NetworkType
 {
 	NT_NONE,
@@ -58,10 +62,12 @@ protected:
 	ENetAddress address;
 	ENetHost* host;
 	enet_uint32 latency;
-	ENetEvent netEvent;
+	ENetEvent* netEvent;
+	vector<ENetPeer*> registeredClients;
 public:
 	Network();
 public:
+	inline vector<ENetPeer*> GetRegisteredClients()const { return registeredClients;  }
 	virtual void Connect(const char* _ip, const int _port);
 public:
 	void Start(const char* _ip, const int _port);
